@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+.bubble-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.transition-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #4A90E2 0%,
+    #2E86AB 30%,
+    #1B4965 60%,
+    #0B1426 100%
+  );
+  animation: deepenColor 3s ease-in-out forwards;
+}
+
+@keyframes deepenColor {
+  0% {
+    background: linear-gradient(to bottom, #87CEEB 0%, #4A90E2 50%, #2E86AB 100%);
+  }
+  100% {
+    background: linear-gradient(to bottom, #4A90E2 0%, #2E86AB 30%, #1B4965 60%, #0B1426 100%);
+  }
+}
+
+.bubble-layers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bubble-wave {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.transition-bubble {
+  position: absolute;
+  bottom: -100px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  );
+  border-radius: 50%;
+  animation: bubbleRiseTransition 3s ease-out forwards;
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes bubbleRiseTransition {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+    transform: translateX(0px) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(var(--end-x, 0px)) scale(1.2);
+  }
+}
+
+.diving-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  z-index: 10;
+}
+
+.diving-text h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #00ffea, #00fbf7, #01ffc8);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 2s ease infinite, fadeInScale 0.8s ease-out;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.diving-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.diving-dots span {
+  font-size: 2rem;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.diving-dots span:nth-child(1) { animation-delay: 0s; }
+.diving-dots span:nth-child(2) { animation-delay: 0.3s; }
+.diving-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.water-ripples {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rippleExpand 2s ease-out infinite;
+}
+
+.ripple-1 { animation-delay: 0s; }
+.ripple-2 { animation-delay: 0.7s; }
+.ripple-3 { animation-delay: 1.4s; }
+
+@keyframes rippleExpand {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+/* Animation state class */
+.bubble-transition-container.animating .transition-background {
+  animation-play-state: running;
+}
+
+.bubble-transition-container.animating .transition-bubble {
+  animation-play-state: running;
+}

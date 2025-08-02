@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+.scroll-animal {
+  position: absolute;
+  animation: bob 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.animal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.scroll-animal:hover .animal-image {
+  transform: scale(1.1);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+.animal-info {
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 20px);
+  width: 280px;
+  min-height: 120px;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+  color: #004d5c;
+  padding: 18px 20px;
+  border-radius: 16px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 2px solid #26c6da;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateX(-10px) translateY(10px) scale(0.9);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+/* Arrow pointing to the animal */
+.animal-info::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #26c6da;
+}
+
+.animal-info::after {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid #e0f7fa;
+}
+
+.scroll-animal:hover .animal-info {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0px) translateY(0px) scale(1);
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-text {
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+.info-text:first-child {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #00363f;
+  border-bottom: 2px solid #26c6da;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.audio-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(38, 198, 218, 0.3);
+}
+
+.audio-icon {
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #00695c;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
+  padding: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.audio-icon:hover {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.5);
+  filter: drop-shadow(0 0 8px rgba(0, 105, 92, 0.4));
+}
+
+.audio-icon.playing {
+  animation: pulse 1.5s infinite;
+  color: #d32f2f;
+}
+
+@keyframes pulse {
+  0% { 
+    transform: scale(1); 
+    background: rgba(255, 255, 255, 0.3);
+  }
+  50% { 
+    transform: scale(1.15); 
+    background: rgba(255, 255, 255, 0.6);
+  }
+  100% { 
+    transform: scale(1); 
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes bob {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-8px) rotate(1deg); 
+  }
+  50% { 
+    transform: translateY(-4px) rotate(0deg); 
+  }
+  75% { 
+    transform: translateY(-12px) rotate(-1deg); 
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .animal-info {
+    left: calc(100% + 15px);
+    width: 250px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .animal-info {
+    left: calc(100% + 10px);
+    width: 200px;
+    font-size: 0.85rem;
+    padding: 14px 16px;
+  }
+  
+  .info-text:first-child {
+    font-size: 1rem;
+  }
+}
+
+/* Ensure info box doesn't go off screen */
+@media (max-width: 640px) {
+  .animal-info {
+    left: auto;
+    right: calc(100% + 10px);
+    transform: translateX(10px) translateY(10px) scale(0.9);
+  }
+  
+  .animal-info::before {
+    left: auto;
+    right: -8px;
+    border-right: none;
+    border-left: 8px solid #26c6da;
+  }
+  
+  .animal-info::after {
+    left: auto;
+    right: -6px;
+    border-right: none;
+    border-left: 6px solid #e0f7fa;
+  }
+  
+  .scroll-animal:hover .animal-info {
+    transform: translateX(0px) translateY(0px) scale(1);
+  }
+}

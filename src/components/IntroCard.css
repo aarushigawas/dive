@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600;700&display=swap');
+
+.intro-card-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Video Background */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* For mobile/portrait videos (9:16), ensure they cover the screen properly */
+@media (orientation: portrait) {
+  .background-video {
+    width: 100vh; /* Use viewport height for width to ensure coverage */
+    height: auto;
+    min-width: 100vh;
+    min-height: 100%;
+  }
+}
+
+/* For landscape screens with portrait video */
+@media (orientation: landscape) {
+  .background-video {
+    height: 100vw; /* Use viewport width for height */
+    width: auto;
+    min-height: 100vw;
+    min-width: 100%;
+  }
+}
+
+/* Video overlay to blend with effects and ensure text readability */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* Transparent Bubbles for Intro */
+.intro-bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.intro-bubble {
+  position: absolute;
+  border-radius: 50%;
+  animation: introBubbleRise linear infinite;
+  opacity: 0;
+}
+
+.transparent-bubble {
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.1),
+    inset 25px -25px 25px rgba(255, 255, 255, 0.08),
+    0 0 25px rgba(255, 255, 255, 0.04);
+}
+
+@keyframes introBubbleRise {
+  0% {
+    bottom: -60px;
+    opacity: 0;
+    transform: translateX(0px) scale(0.4);
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(40px) scale(1.4);
+  }
+}
+
+/* Floating particles for intro */
+.intro-particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.intro-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: introFloatParticle linear infinite;
+}
+
+@keyframes introFloatParticle {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) translateX(15px);
+    opacity: 0;
+  }
+}
+
+
+
+/* Mouse interactive light effect */
+.mouse-light-effect {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-out;
+}
+
+/* Main content */
+.intro-content {
+  position: relative;
+  z-index: 6;
+  text-align: center;
+  max-width: 800px;
+  padding: 40px 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.intro-header {
+  margin-bottom: 40px;
+}
+
+.intro-title {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title-ocean {
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(90deg, #00ffea, #00fbf7, #01ffc8);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleGradientShift 4s ease infinite;
+}
+
+.title-depths {
+  font-family: 'Inter', sans-serif;
+  color: #bfdbfe;
+  margin-left: 20px;
+}
+
+@keyframes titleGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.intro-subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.intro-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  gap: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #00ffea;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.stat-divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.intro-description {
+  margin: 40px 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.start-dive-btn {
+  position: relative;
+  background: linear-gradient(135deg, #00ffea, #01ffc8);
+  border: none;
+  padding: 18px 40px;
+  border-radius: 50px;
+  color: #0B1426;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 30px rgba(0, 255, 234, 0.4);
+}
+
+.start-dive-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 255, 234, 0.5);
+}
+
+.start-dive-btn span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.btn-bubble {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: btnBubbleRise 2s linear infinite;
+}
+
+.btn-bubble:nth-child(1) {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.btn-bubble:nth-child(2) {
+  left: 50%;
+  animation-delay: 0.7s;
+}
+
+.btn-bubble:nth-child(3) {
+  left: 80%;
+  animation-delay: 1.4s;
+}
+
+@keyframes btnBubbleRise {
+  0% {
+    bottom: 10px;
+    opacity: 0.8;
+    transform: scale(0.5);
+  }
+  100% {
+    bottom: 60px;
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .intro-title {
+    font-size: 3rem;
+  }
+  
+  .title-depths {
+    margin-left: 10px;
+  }
+  
+  .intro-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .stat-divider {
+    width: 50px;
+    height: 1px;
+  }
+  
+  .intro-content {
+    margin: 20px;
+    padding: 30px 20px;
+  }
+  
+  .mouse-light-effect {
+    width: 150px;
+    height: 150px;
+  }
+}

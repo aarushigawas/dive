@@ -1,0 +1,23 @@
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+  background: #000814;
+  color: #ffffff;
+  font-family: 'Georgia', serif;
+  overflow-x: hidden;
+}
+
+.App {
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: 'Cinzel', serif;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}

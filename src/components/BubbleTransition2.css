@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+.bubble-transition2-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Layered background with depth effect */
+.transition2-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.depth-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: layerDescend 3.5s ease-in-out forwards;
+}
+
+.layer-1 {
+  background: radial-gradient(ellipse at center, #87CEEB 0%, #4A90E2 40%, #2E86AB 100%);
+  animation-delay: 0s;
+}
+
+.layer-2 {
+  background: radial-gradient(ellipse at center, transparent 0%, #2E86AB 30%, #1B4965 80%, #0B1426 100%);
+  animation-delay: 0.5s;
+}
+
+.layer-3 {
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, #0B1426 100%);
+  animation-delay: 1s;
+}
+
+@keyframes layerDescend {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Spiral bubble animation */
+.spiral-bubble-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.spiral-bubble {
+  position: absolute;
+  background: radial-gradient(
+    circle at 25% 25%,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: spiralDescent 3s ease-out forwards;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes spiralDescent {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(720deg) translateY(100vh);
+  }
+}
+
+/* Depth particles */
+.depth-particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.depth-particle {
+  position: absolute;
+  top: -10px;
+  background: rgba(135, 206, 235, 0.7);
+  border-radius: 50%;
+  animation: particleDrift linear infinite;
+  box-shadow: 0 0 8px rgba(135, 206, 235, 0.5);
+}
+
+@keyframes particleDrift {
+  0% {
+    top: -10px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+  }
+}
+
+/* Central vortex effect */
+.central-vortex {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.vortex-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid rgba(0, 255, 234, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: vortexSpin linear infinite;
+}
+
+.ring-1 {
+  width: 100px;
+  height: 100px;
+  animation-duration: 2s;
+  border-color: rgba(0, 255, 234, 0.8);
+}
+
+.ring-2 {
+  width: 150px;
+  height: 150px;
+  animation-duration: 3s;
+  animation-direction: reverse;
+  border-color: rgba(0, 255, 234, 0.6);
+}
+
+.ring-3 {
+  width: 200px;
+  height: 200px;
+  animation-duration: 4s;
+  border-color: rgba(0, 255, 234, 0.4);
+}
+
+.ring-4 {
+  width: 250px;
+  height: 250px;
+  animation-duration: 5s;
+  animation-direction: reverse;
+  border-color: rgba(0, 255, 234, 0.2);
+}
+
+@keyframes vortexSpin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Dynamic text animation */
+.transition2-text {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.text-phase {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out;
+}
+
+.bubble-transition2-container.phase-0 .text-phase.phase-0,
+.bubble-transition2-container.phase-1 .text-phase.phase-1,
+.bubble-transition2-container.phase-2 .text-phase.phase-2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.transition2-text h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #00ffea, #01ffc8, #00fbf7);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientFlow 2s ease infinite;
+}
+
+@keyframes textGradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Loading bar for phase 0 */
+.loading-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.loading-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffea, #01ffc8);
+  border-radius: 2px;
+  animation: loadingProgress 2s ease-out forwards;
+}
+
+@keyframes loadingProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Depth counter for phase 1 */
+.depth-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+
+.depth-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00ffea;
+  animation: depthCount 1.5s ease-out forwards;
+}
+
+.depth-unit {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes depthCount {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Ready indicator for phase 2 */
+.ready-indicator {
+  font-size: 2rem;
+  color: #01ffc8;
+  animation: readyPulse 1s ease-in-out infinite;
+  margin-top: 10px;
+}
+
+@keyframes readyPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* Light rays effect */
+.light-rays {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.light-ray {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  width: 2px;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(135, 206, 235, 0.8) 20%,
+    rgba(135, 206, 235, 0.4) 80%,
+    transparent 100%
+  );
+  transform-origin: top center;
+  animation: rayRotate linear infinite;
+}
+
+.ray-1 {
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.ray-2 {
+  animation-duration: 10s;
+  animation-delay: -2s;
+  transform: translateX(-50%) rotate(72deg);
+}
+
+.ray-3 {
+  animation-duration: 12s;
+  animation-delay: -4s;
+  transform: translateX(-50%) rotate(144deg);
+}
+
+.ray-4 {
+  animation-duration: 9s;
+  animation-delay: -1s;
+  transform: translateX(-50%) rotate(216deg);
+}
+
+.ray-5 {
+  animation-duration: 11s;
+  animation-delay: -3s;
+  transform: translateX(-50%) rotate(288deg);
+}
+
+@keyframes rayRotate {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .transition2-text h2 {
+    font-size: 2rem;
+  }
+  
+  .depth-number {
+    font-size: 2.5rem;
+  }
+  
+  .vortex-ring {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  
+  .loading-bar {
+    width: 150px;
+  }
+}
