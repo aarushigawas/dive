@@ -13,10 +13,10 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Generate bubbles for intro card
+  
   const generateBubbles = () => {
     const bubbles = [];
-    const bubbleCount = 15; // Fixed count for intro
+    const bubbleCount = 15; 
     
     for (let i = 0; i < bubbleCount; i++) {
       const delay = i * 0.5;
@@ -43,7 +43,7 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
     return bubbles;
   };
 
-  // Generate floating particles
+  
   const generateParticles = () => {
     const particles = [];
     const particleCount = 20;
@@ -72,7 +72,6 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
 
   return (
     <div className="intro-card-container">
-      {/* Video Background */}
       <div className="video-background">
         <video
           autoPlay
@@ -84,28 +83,31 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
           <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Overlay to darken video and blend with effects */}
+        
         <div className="video-overlay"></div>
       </div>
 
-      {/* Floating bubbles */}
+      
+
+
+
       <div className="intro-bubbles-container">
         {generateBubbles()}
       </div>
       
-      {/* Floating particles */}
+      
       <div className="intro-particles-container">
         {generateParticles()}
       </div>
       
-      {/* Caustic light effects */}
+      
       <div className="intro-caustic-lights">
         <div className="intro-caustic-pattern intro-caustic-1" />
         <div className="intro-caustic-pattern intro-caustic-2" />
         <div className="intro-caustic-pattern intro-caustic-3" />
       </div>
 
-      {/* Interactive mouse light effect */}
+    
       <div 
         className="mouse-light-effect"
         style={{
@@ -114,7 +116,7 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
         }}
       />
 
-      {/* Main content */}
+  
       <div className="intro-content">
         <div className="intro-header">
           <h1 className="intro-title">
@@ -161,5 +163,34 @@ const IntroCard = ({ onStartDive, videoSrc }) => {
     </div>
   );
 };
+
+
+function setVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+
+
+window.addEventListener('resize', setVH);
+window.addEventListener('orientationchange', () => {
+  setTimeout(setVH, 100);
+});
+
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+  document.body.classList.add('mobile-device');
+}
 
 export default IntroCard;

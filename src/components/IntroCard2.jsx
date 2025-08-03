@@ -17,15 +17,15 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Handle the dive button click
+  
   const handleStartDive = () => {
     setShowTransition(true);
   };
 
-  // Handle transition completion
+  
   const handleTransitionComplete = () => {
     setShowTransition(false);
-    // Call the appropriate callback
+  
     if (onEquipmentComplete) {
       onEquipmentComplete();
     } else if (onStartDive) {
@@ -33,7 +33,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
     }
   };
 
-  // Generate floating orbs
+  
   const generateFloatingOrbs = () => {
     const orbs = [];
     for (let i = 0; i < 15; i++) {
@@ -63,7 +63,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
     return orbs;
   };
 
-  // Generate streaming lights
+  
   const generateStreamingLights = () => {
     const lights = [];
     for (let i = 0; i < 8; i++) {
@@ -89,7 +89,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
   return (
     <>
       <div className={`intro-card2-container ${isVisible ? 'visible' : ''}`}>
-        {/* Video Background */}
+        
         <div className="video-background2">
           <video
             autoPlay
@@ -104,17 +104,16 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
           <div className="video-overlay2"></div>
         </div>
 
-        {/* Floating orbs */}
+        
         <div className="floating-orbs-container">
           {generateFloatingOrbs()}
         </div>
-
-        {/* Streaming lights */}
+        
         <div className="streaming-lights-container">
           {generateStreamingLights()}
         </div>
 
-        {/* Interactive cursor glow */}
+        
         <div 
           className="cursor-glow"
           style={{
@@ -122,8 +121,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
             top: mousePosition.y
           }}
         ></div>
-
-        {/* Main content */}
+        
         <div className="intro2-content">
           <div className="intro2-header">
             <div className="logo-section">
@@ -136,7 +134,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
             <p className="intro2-subtitle">Advanced Deep-Sea Technology & Equipment</p>
           </div>
 
-          {/* Features section */}
+        
           <div className="intro2-features">
             <div className="feature-grid">
               <div className="feature-card">
@@ -158,7 +156,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
             </div>
           </div>
 
-          {/* Stats section */}
+          
           <div className="intro2-stats-section">
             <div className="stats-container">
               <div className="stat-circle">
@@ -176,14 +174,14 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
             </div>
           </div>
 
-          {/* Description */}
+          
           <div className="intro2-description">
             <p>
               Explore the cutting-edge technology that makes deep-sea exploration possible. 
             </p>
           </div>
 
-          {/* Action buttons */}
+          
           <div className="intro2-actions">
             <button 
               className="dive-btn-2"
@@ -212,7 +210,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
           </div>
         </div>
 
-        {/* Decorative elements */}
+      
         <div className="decorative-elements">
           <div className="deco-circle deco-1"></div>
           <div className="deco-circle deco-2"></div>
@@ -221,7 +219,7 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
         </div>
       </div>
 
-      {/* Bubble Transition Overlay */}
+      
       {showTransition && (
         <BubbleTransition2 onComplete={handleTransitionComplete} />
       )}
@@ -229,13 +227,12 @@ const IntroCard2 = ({ onStartDive, onBackToDeepDiving, onEquipmentComplete }) =>
   );
 };
 
-// BubbleTransition2 component
 const BubbleTransition2 = ({ onComplete }) => {
   const [bubbles, setBubbles] = useState([]);
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
-    // Generate initial bubbles
+    
     const initialBubbles = [];
     for (let i = 0; i < 30; i++) {
       initialBubbles.push({
@@ -250,7 +247,7 @@ const BubbleTransition2 = ({ onComplete }) => {
     }
     setBubbles(initialBubbles);
 
-    // Animation timer
+  
     const animationTimer = setTimeout(() => {
       setIsAnimating(false);
       setTimeout(() => {
@@ -258,7 +255,7 @@ const BubbleTransition2 = ({ onComplete }) => {
       }, 1000);
     }, 4500);
 
-    // Bubble animation interval
+  
     const interval = setInterval(() => {
       setBubbles(prevBubbles => 
         prevBubbles.map(bubble => ({
@@ -277,7 +274,7 @@ const BubbleTransition2 = ({ onComplete }) => {
 
   return (
     <div className="bubble-transition2">
-      {/* Bubbles */}
+    
       {bubbles.map(bubble => (
         <div
           key={bubble.id}
@@ -294,7 +291,7 @@ const BubbleTransition2 = ({ onComplete }) => {
         />
       ))}
 
-      {/* Transition text */}
+      
       <div className="transition-text2" style={{ opacity: isAnimating ? 1 : 0 }}>
         <div className="transition-main-text">🌊 Diving Deep...</div>
         <div className="transition-sub-text">Preparing Equipment Tour</div>
@@ -302,5 +299,34 @@ const BubbleTransition2 = ({ onComplete }) => {
     </div>
   );
 };
+
+
+function setVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+
+setVH();
+
+window.addEventListener('resize', setVH);
+window.addEventListener('orientationchange', () => {
+  setTimeout(setVH, 100);
+});
+
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+  document.body.classList.add('mobile-device');
+}
 
 export default IntroCard2;

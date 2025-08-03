@@ -1,32 +1,13 @@
-import React, { useState } from 'react';
-import Mysteries from './components/Mysteries';
+import React from 'react';
 import './App.css';
+import Mysteries from './components/Mysteries';
 
-const App = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [currentStoryId, setCurrentStoryId] = useState(null);
-
-  const handleHotspotClick = (id) => {
-    setCurrentStoryId(id);
-    setCurrentPage('story');
-  };
-
-  const handleBackToHome = () => {
-    setCurrentPage('home');
-    setCurrentStoryId(null);
-    window.scrollTo(0, 0);
-  };
-
+function App() {
   return (
     <div className="App">
-      <Mysteries 
-        currentPage={currentPage}
-        currentStoryId={currentStoryId}
-        onHotspotClick={handleHotspotClick}
-        onBackToHome={handleBackToHome}
-      />
+      <Mysteries />
     </div>
   );
-};
+}
 
 export default App;

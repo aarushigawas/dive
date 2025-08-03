@@ -193,3 +193,55 @@
 .bubble-transition-container.animating .transition-bubble {
   animation-play-state: running;
 }
+
+@media (max-width:768px)
+{
+  .diving-text h2
+  {
+    font-size:2.2rem;
+  }
+  
+  .diving-dots span
+  {
+    font-size:1.5rem;
+  }
+  
+  .ripple
+  {
+    border:1px solid rgba(255,255,255,0.3);
+  }
+  
+  @keyframes rippleExpand
+  {
+    0%
+    {
+      width:0px;
+      height:0px;
+      opacity:1;
+    }
+    100%
+    {
+      width:200px;
+      height:200px;
+      opacity:0;
+    }
+  }
+}
+
+@media (max-width:480px)
+{
+  .diving-text h2
+  {
+    font-size:1.8rem;
+  }
+  
+  .diving-dots span
+  {
+    font-size:1.2rem;
+  }
+  
+  .diving-dots
+  {
+    gap:8px;
+  }
+}

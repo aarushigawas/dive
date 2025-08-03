@@ -1,9 +1,10 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import './DeepDiving.css';
 
 const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
-  // Add your video file path here (should be in public folder)
-  const backgroundVideoSrc = '/jellyfish_wanted.mp4'; // Replace with your actual video file name
+  
+  const backgroundVideoSrc = '/jellyfish_wanted.mp4'; 
 
   const containerStyle = {
     position: 'relative',
@@ -22,7 +23,7 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
   };
 
   const titleContainerStyle = {
-    position: 'fixed',
+    position: 'absolute',
     top: '10%',
     left: '50%',
     transform: 'translateX(-50%)',
@@ -30,23 +31,30 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     textAlign: 'center'
   };
 
-  const waveTextStyle = {
-    fontSize: '4rem',
-    fontWeight: 'bold',
+  const improvedTitleStyle = {
+    fontSize: '5rem',
+    fontWeight: '800',
     color: '#ffffff',
-    textShadow: `
-      0 0 20px rgba(0, 150, 255, 0.8),
-      0 0 40px rgba(0, 100, 200, 0.6),
-      0 0 60px rgba(0, 50, 150, 0.4)
-    `,
-    fontFamily: 'Arial, sans-serif',
-    letterSpacing: '3px',
-    background: 'linear-gradient(45deg, #00c9ff, #92fe9d, #00c9ff, #92fe9d)',
-    backgroundSize: '300% 300%',
+    fontFamily: '"Poppins", "Inter", "Arial", sans-serif',
+    letterSpacing: '2px',
+    background: 'linear-gradient(135deg, #00d4ff, #7b2cbf, #06ffa5, #4cc9f0)',
+    backgroundSize: '400% 400%',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    animation: 'wave-animation 3s ease-in-out infinite, gradient-shift 4s ease infinite'
+    textShadow: '0 0 40px rgba(0, 212, 255, 0.5)',
+    marginBottom: '1rem',
+    filter: 'drop-shadow(0 4px 20px rgba(0, 150, 255, 0.3))'
+  };
+
+  const taglineStyle = {
+    fontSize: '1.4rem',
+    fontWeight: '300',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontFamily: '"Inter", "Arial", sans-serif',
+    letterSpacing: '1px',
+    textShadow: '0 0 20px rgba(0, 200, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.3)',
+    marginTop: '0.5rem'
   };
 
   const contentContainerStyle = {
@@ -57,7 +65,7 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     minHeight: '200vh'
   };
 
-  const transparentBoxStyle = {
+  const improvedBoxStyle = {
     margin: '8rem auto',
     maxWidth: '1000px',
     background: 'rgba(255, 255, 255, 0.08)',
@@ -81,7 +89,7 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     gap: '3rem'
   };
 
-  const imagePlaceholderStyle = {
+  const improvedImageStyle = {
     flex: '0 0 200px',
     height: '200px',
     background: 'rgba(255, 255, 255, 0.1)',
@@ -92,12 +100,8 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     border: '2px solid rgba(255, 255, 255, 0.2)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
-    transition: 'all 0.3s ease'
-  };
-
-  const placeholderTextStyle = {
-    fontSize: '4rem',
-    filter: 'drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3))'
+    transition: 'all 0.3s ease',
+    overflow: 'hidden'
   };
 
   const textContentStyle = {
@@ -105,23 +109,26 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     color: '#ffffff'
   };
 
-  const headingStyle = {
-    fontSize: '2.5rem',
+  const improvedHeadingStyle = {
+    fontSize: '2.8rem',
     marginBottom: '1rem',
     color: '#ffffff',
-    textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
-    fontWeight: '600',
-    background: 'linear-gradient(135deg, #00c9ff, #92fe9d)',
+    fontWeight: '700',
+    fontFamily: '"Poppins", "Inter", sans-serif',
+    background: 'linear-gradient(135deg, #00d4ff, #06ffa5, #4cc9f0)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text'
+    backgroundClip: 'text',
+    filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5))',
+    textShadow: '0 0 30px rgba(0, 200, 255, 0.4)'
   };
 
   const paragraphStyle = {
     fontSize: '1.2rem',
     lineHeight: 1.6,
     color: 'rgba(255, 255, 255, 0.9)',
-    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)'
+    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)',
+    fontFamily: '"Inter", sans-serif'
   };
 
   const floatingParticleStyle = {
@@ -135,7 +142,6 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     boxShadow: '0 0 10px #00c9ff'
   };
 
-  // Generate random positions for particles
   const particles = Array.from({ length: 6 }, (_, i) => ({
     id: i,
     x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
@@ -143,9 +149,80 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
     animationDelay: Math.random() * 5
   }));
 
+  // Animation variants
+  const titleVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.5, 
+      filter: 'blur(20px)' 
+    },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      filter: 'blur(0px)',
+      transition: { 
+        duration: 1.2, 
+        ease: "easeOut",
+        delay: 0.2
+      } 
+    }
+  };
+
+  const taglineVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8, 
+        ease: "easeOut",
+        delay: 1
+      } 
+    }
+  };
+
+  const boxVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.6, 
+        ease: "easeOut" 
+      } 
+    }
+  };
+
+  const textVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: -30 
+    },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { 
+        duration: 0.6, 
+        ease: "easeOut",
+        delay: 0.2 
+      } 
+    }
+  };
+
   return (
     <div style={containerStyle} className="deep-diving-container">
-      {/* Video Background - Fixed */}
+      
+      <link 
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" 
+        rel="stylesheet" 
+      />
+      
       <div className="video-background-container">
         <video
           autoPlay
@@ -161,58 +238,147 @@ const DeepDiving = ({ onExploreAnimals, onExploreSuits }) => {
         <div style={backgroundOverlayStyle} className="video-overlay"></div>
       </div>
       
-      {/* Animated Title */}
       <div style={titleContainerStyle}>
-        <h1 style={waveTextStyle} className="wave-text">Deep Diving</h1>
+        <motion.h1 
+          style={improvedTitleStyle} 
+          className="improved-title"
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          Deep Diving
+        </motion.h1>
+        <motion.p 
+          style={taglineStyle} 
+          className="tagline"
+          variants={taglineVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          Uncover what lies beneath the surface
+        </motion.p>
       </div>
 
-      {/* Scrollable Content */}
+      
       <div style={contentContainerStyle}>
-        {/* Animals Section */}
-        <div 
-          className="transparent-box" 
-          style={transparentBoxStyle}
+      
+        <motion.div 
+          className="transparent-box improved-box" 
+          style={improvedBoxStyle}
           onClick={onExploreAnimals}
+          variants={boxVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          whileHover={{ 
+            scale: 1.02, 
+            y: -8,
+            boxShadow: '0 35px 70px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 200, 255, 0.3)',
+            transition: { duration: 0.3 }
+          }}
         >
           <div style={boxContentStyle} className="box-content">
-            <div className="image-placeholder" style={imagePlaceholderStyle}>
-              <div style={placeholderTextStyle} className="placeholder-text">
-                <img src="/sardines_deep.jpg" alt="Fish" style={{ width: "100%", height: "auto" }} />
-              </div>
-
-            </div>
-            <div style={textContentStyle} className="text-content">
-              <h2 style={headingStyle}>Explore About the Animals</h2>
-              <p style={paragraphStyle}>Discover the mysterious creatures of the deep ocean</p>
-            </div>
+            <motion.div 
+              className="image-placeholder improved-image" 
+              style={improvedImageStyle}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <img 
+                src="/sardines_deep.jpg" 
+                alt="Deep Sea Fish" 
+                style={{ 
+                  width: "100%", 
+                  height: "100%", 
+                  objectFit: "cover",
+                  borderRadius: "13px"
+                }} 
+              />
+            </motion.div>
+            <motion.div 
+              style={textContentStyle} 
+              className="text-content"
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <h2 style={improvedHeadingStyle}>Explore About the Animals</h2>
+              <motion.p 
+                style={paragraphStyle}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                Discover the mysterious creatures of the deep ocean
+              </motion.p>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Suits Section */}
-        <div 
-          className="transparent-box" 
-          style={transparentBoxStyle}
+        <motion.div 
+          className="transparent-box improved-box" 
+          style={improvedBoxStyle}
           onClick={onExploreSuits}
+          variants={boxVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          whileHover={{ 
+            scale: 1.02, 
+            y: -8,
+            boxShadow: '0 35px 70px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 200, 255, 0.3)',
+            transition: { duration: 0.3 }
+          }}
         >
           <div style={boxContentStyle} className="box-content">
-            <div className="image-placeholder" style={imagePlaceholderStyle}>
-              <div style={placeholderTextStyle} className="placeholder-text">
-  <img src="/deep_scuba.jpg" alt="Fish" style={{ width: "100%", height: "auto" }} />
-</div>
-
-            </div>
-            <div style={textContentStyle} className="text-content">
-              <h2 style={headingStyle}>Explore About the Suits</h2>
-              <p style={paragraphStyle}>Learn about advanced diving equipment and technology</p>
-            </div>
+            <motion.div 
+              className="image-placeholder improved-image" 
+              style={improvedImageStyle}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <img 
+                src="/deep_scuba.jpg" 
+                alt="Deep Diving Suit" 
+                style={{ 
+                  width: "100%", 
+                  height: "100%", 
+                  objectFit: "cover",
+                  borderRadius: "13px"
+                }} 
+              />
+            </motion.div>
+            <motion.div 
+              style={textContentStyle} 
+              className="text-content"
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <h2 style={improvedHeadingStyle}>Explore About the Suits</h2>
+              <motion.p 
+                style={paragraphStyle}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                Learn about advanced diving equipment and technology
+              </motion.p>
+            </motion.div>
           </div>
-        </div>
-
-        {/* Additional spacing for scroll effect */}
+        </motion.div>
         <div style={{ height: '100vh' }}></div>
       </div>
 
-      {/* Floating particles effect */}
       {particles.map((particle) => (
         <div
           key={particle.id}

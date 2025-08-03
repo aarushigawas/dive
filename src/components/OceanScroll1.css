@@ -5,13 +5,13 @@
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  /* Dynamic gradient background that gets darker as you scroll */
+  
   background: linear-gradient(to bottom, #4A90E2 0%, #2E86AB 30%, #1B4965 60%, #000000 100%);
   color: white;
   font-family: 'Inter', sans-serif;
 }
 
-/* Intro Dive Area - 16:9 aspect ratio */
+
 .intro-dive-area {
   height: 70vw;
   max-height: 200vh;
@@ -152,7 +152,7 @@
   }
 }
 
-/* Realistic Bubbles */
+
 .bubbles-container {
   position: fixed;
   top: 0;
@@ -202,7 +202,7 @@
   }
 }
 
-/* Floating particles for depth effect */
+
 .particles-container {
   position: fixed;
   top: 0;
@@ -236,7 +236,7 @@
   }
 }
 
-/* Flashlight effect for aphotic zones */
+
 .flashlight-effect {
   position: absolute;
   left: 50%;
@@ -266,7 +266,7 @@
   }
 }
 
-/* Caustic light patterns for shallow zones */
+
 .caustic-lights {
   position: fixed;
   top: 0;
@@ -318,14 +318,14 @@
   }
 }
 
-/* Enhanced Diver Animation */
+
 .enhanced-diver {
   transition: all 0.1s ease-out;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   z-index: 6;
 }
 
-/* Diver bubble trail */
+
 .diver-bubbles {
   pointer-events: none;
 }
@@ -372,7 +372,7 @@
   position: relative;
 }
 
-/* Aphotic zone styling */
+
 .aphotic-zone {
   background: rgba(0, 0, 0, 0.2);
   border-top: 1px solid rgba(255, 255, 100, 0.1);
@@ -531,7 +531,7 @@
   z-index: 1;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .intro-message h2 {
     font-size: 2rem;
@@ -572,5 +572,121 @@
   .intro-message {
     padding: 20px;
     margin: 30px 0;
+  }
+}
+
+
+@supports (-webkit-touch-callout: none) {
+  .ocean-scroll-container {
+    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
+  }
+  
+  .intro-dive-area {
+    height: -webkit-fill-available;
+  }
+  
+  .bubbles-container,
+  .particles-container,
+  .caustic-lights {
+    height: -webkit-fill-available;
+  }
+}
+
+
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* mobile*/
+@media (hover: none) and (pointer: coarse) {
+  .intro-message:hover {
+    transform: none;
+  }
+  
+  .flashlight-effect {
+    display: none;
+  }
+}
+
+
+@media (max-width: 896px) and (orientation: landscape) {
+  .intro-dive-area {
+    height: 90vh;
+  }
+  
+  .intro-message h2 {
+    font-size: 2.5rem;
+  }
+  
+  .intro-message h3 {
+    font-size: 1.8rem;
+  }
+  
+  .intro-message p {
+    font-size: 1.2rem;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .intro-message h2 {
+    font-size: 1.8rem;
+  }
+  
+  .intro-message h3 {
+    font-size: 1.3rem;
+  }
+  
+  .intro-message p {
+    font-size: 0.9rem;
+  }
+  
+  .zone-name {
+    font-size: 1.5em;
+  }
+  
+  .depth-marker {
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .ocean-scroll-container {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+.ocean-scroll-container {
+  overflow-x: hidden;
+}
+
+
+@media (max-width: 768px) {
+  .bubble {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  
+  .floating-particle {
+    width: 1px;
+    height: 1px;
+  }
+  
+  .caustic-lights {
+    opacity: 0.2;
   }
 }

@@ -12,7 +12,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Video Background */
+
 .video-background {
   position: absolute;
   top: 0;
@@ -36,27 +36,26 @@
   z-index: 1;
 }
 
-/* For mobile/portrait videos (9:16), ensure they cover the screen properly */
+
 @media (orientation: portrait) {
   .background-video {
-    width: 100vh; /* Use viewport height for width to ensure coverage */
+    width: 100vh; 
     height: auto;
     min-width: 100vh;
     min-height: 100%;
   }
 }
 
-/* For landscape screens with portrait video */
 @media (orientation: landscape) {
   .background-video {
-    height: 100vw; /* Use viewport width for height */
+    height: 100vw; 
     width: auto;
     min-height: 100vw;
     min-width: 100%;
   }
 }
 
-/* Video overlay to blend with effects and ensure text readability */
+
 .video-overlay {
   position: absolute;
   top: 0;
@@ -67,7 +66,7 @@
   z-index: 2;
 }
 
-/* Transparent Bubbles for Intro */
+
 .intro-bubbles-container {
   position: absolute;
   top: 0;
@@ -113,7 +112,6 @@
   }
 }
 
-/* Floating particles for intro */
 .intro-particles-container {
   position: absolute;
   top: 0;
@@ -149,7 +147,7 @@
 
 
 
-/* Mouse interactive light effect */
+
 .mouse-light-effect {
   position: fixed;
   width: 200px;
@@ -167,7 +165,7 @@
   transition: all 0.1s ease-out;
 }
 
-/* Main content */
+
 .intro-content {
   position: relative;
   z-index: 6;
@@ -344,7 +342,7 @@
   }
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
   .intro-title {
     font-size: 3rem;
@@ -373,4 +371,141 @@
     width: 150px;
     height: 150px;
   }
+}
+
+
+@supports (-webkit-touch-callout: none) {
+  .intro-card-container,
+  .intro-card2-container {
+    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
+  }
+  
+  .video-background2,
+  .video-overlay2,
+  .floating-orbs-container,
+  .streaming-lights-container,
+  .cursor-glow,
+  .decorative-elements {
+    height: -webkit-fill-available;
+  }
+}
+
+
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
+  
+  .mouse-light-effect {
+    display: none;
+  }
+  
+  
+  .feature-card:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(135, 206, 235, 0.2);
+    box-shadow: none;
+  }
+  
+  .stat-circle:hover {
+    transform: none;
+    border-color: rgba(135, 206, 235, 0.3);
+    box-shadow: none;
+  }
+  
+  .dive-btn-2:hover {
+    transform: none;
+    box-shadow: 0 15px 30px rgba(0, 201, 255, 0.6), 0 0 25px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #00c9ff, #0080ff);
+  }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+  .intro2-content {
+    min-height: 85vh;
+    padding: 0.8rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .stats-container {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .intro2-title {
+    font-size: 1.8rem;
+  }
+  
+  .intro2-subtitle {
+    font-size: 0.9rem;
+  }
+}
+/*mobile*/
+@media (max-width: 320px) {
+  .intro2-content {
+    padding: 0.5rem;
+    min-height: 98vh;
+  }
+  
+  .intro2-title {
+    font-size: 1.6rem;
+  }
+  
+  .logo-icon {
+    font-size: 1.8rem;
+  }
+  
+  .dive-btn-2 {
+    min-width: 180px;
+    padding: 6px 15px;
+  }
+  
+  .stat-circle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .stat-value {
+    font-size: 0.8rem;
+  }
+  
+  .stat-label {
+    font-size: 0.5rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .intro-card-container,
+  .intro-card2-container {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+.intro-card-container,
+.intro-card2-container {
+  overflow-x: hidden;
 }

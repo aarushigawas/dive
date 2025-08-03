@@ -1,18 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./ScrollAnimal.css";
 
-const ScrollAnimal = ({ 
-  image, 
-  top, 
-  left, 
-  alt, 
-  info, 
-  audio, 
+const ScrollAnimal = ({
+  image,
+  top,
+  left,
+  alt,
+  info,
+  audio,
   size = 120,
-  zoneOffset = 0 // New prop to position relative to zone
+  zoneOffset = 0
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [infoPosition, setInfoPosition] = useState('position-right');
   const audioRef = useRef(null);
+  const animalRef = useRef(null);
 
   const playAudio = () => {
     if (audio && audioRef.current) {
@@ -31,11 +33,50 @@ const ScrollAnimal = ({
     setIsPlaying(false);
   };
 
-  // Calculate position relative to the viewport + zone offset
+  // Calculate smart positioning for the info box
+  useEffect(() => {
+    const calculatePosition = () => {
+      if (!animalRef.current) return;
+
+      const rect = animalRef.current.getBoundingClientRect();
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const infoBoxWidth = 320;
+      const infoBoxHeight = 150; // Approximate height
+
+      // Check if there's enough space on the right
+      if (rect.right + infoBoxWidth + 20 > windowWidth) {
+        // Not enough space on right, try left
+        if (rect.left - infoBoxWidth - 20 > 0) {
+          setInfoPosition('position-left');
+        } else {
+          // Not enough space on left either, try top or bottom
+          if (rect.top - infoBoxHeight - 20 > 0) {
+            setInfoPosition('position-top');
+          } else {
+            setInfoPosition('position-bottom');
+          }
+        }
+      } else {
+        setInfoPosition('position-right');
+      }
+    };
+
+    calculatePosition();
+    window.addEventListener('resize', calculatePosition);
+    window.addEventListener('scroll', calculatePosition);
+
+    return () => {
+      window.removeEventListener('resize', calculatePosition);
+      window.removeEventListener('scroll', calculatePosition);
+    };
+  }, [left, top]);
+
   const calculatedTop = top + zoneOffset;
 
   return (
-    <div 
+    <div
+      ref={animalRef}
       className="scroll-animal"
       style={{
         top: `${calculatedTop}px`,
@@ -45,14 +86,14 @@ const ScrollAnimal = ({
         zIndex: 15
       }}
     >
-      <img 
-        src={image} 
-        alt={alt} 
+      <img
+        src={image}
+        alt={alt}
         className="animal-image"
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
-      
-      <div className="animal-info">
+     
+      <div className={`animal-info ${infoPosition}`}>
         <div className="info-content">
           {info.split('\n').map((line, index) => (
             <p key={index} className="info-text">
@@ -60,10 +101,10 @@ const ScrollAnimal = ({
             </p>
           ))}
         </div>
-        
+       
         {audio && (
           <div className="audio-section">
-            <span 
+            <span
               className={`audio-icon ${isPlaying ? 'playing' : ''}`}
               onClick={playAudio}
               role="button"
@@ -71,8 +112,8 @@ const ScrollAnimal = ({
             >
               {isPlaying ? '🔊' : '🔈'}
             </span>
-            <audio 
-              ref={audioRef} 
+            <audio
+              ref={audioRef}
               onEnded={handleAudioEnded}
               preload="metadata"
             >

@@ -400,3 +400,52 @@
     width: 150px;
   }
 }
+
+@media (max-width: 768px) {
+    .transition2-text h2 {
+        font-size: 2rem;
+    }
+    
+    .depth-number {
+        font-size: 2.5rem;
+    }
+    
+    .vortex-ring {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    
+    .loading-bar {
+        width: 150px;
+    }
+    
+    .ready-indicator {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .transition2-text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .depth-number {
+        font-size: 2rem;
+    }
+    
+    .depth-unit {
+        font-size: 1.2rem;
+    }
+    
+    .vortex-ring {
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+    
+    .loading-bar {
+        width: 120px;
+        height: 3px;
+    }
+    
+    .ready-indicator {
+        font-size: 1.2rem;
+    }
+}
